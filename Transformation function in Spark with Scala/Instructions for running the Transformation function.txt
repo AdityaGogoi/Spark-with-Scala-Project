@@ -1,0 +1,15 @@
+1. Put the dataset (baby_names.csv in the spark-bin-hadoop2.7) folder.
+
+2. Store the dataset values in the local RDD.
+	val babyNames = sc.textFile("baby_names.csv")
+
+3. Split the data into rows using comma(,) as delimiter and remove the first row which contains headings. Store the result in a new dataset.
+	val filteredRows = babyNames.filter(line => !line.contains("Count")).map(line => line.split(","))
+
+4. We can see a part of the RDD using the 'collect' function.
+	filteredRows.collect
+
+5. We will next map the 1st value of each array (i.e. Names) with the 4th value of each array (i.e. Instances of name use). We will reduce the mapped data by adding the 'instances' value, keeping the 'Names' value as reference.
+	filteredRows.map(n => (n(1),n(4).toInt)).reduceByKey((v1,v2) => v1 + v2).collect
+
+Refer the Youtube video "Spark Transformation Function using Scala"(https://youtu.be/jeIHdxD_a54) for more clarity. 	
