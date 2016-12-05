@@ -1,0 +1,31 @@
+1. Prerequisites : Installation of Spark, Scala, Java and SBT.
+ 
+2. Copy the 'spark-cluster-master' to the folder 'spark-2.0.2-bin-hadoop2.7'.
+
+3. To start the architecture, start the Master Node. Go to spark-2.0.2-bin-hadoop2.7. Then start the 'start-master' shell script.
+	sbi/start-master.sh
+
+4. Then we will start the Worker Node with the 'spark-class' script with worker parameters and the URL of the Cluster Host.
+	bin/spark-class org.apache.spark.deploy.worker.Worker spark://quickstart.cloudera:7077
+
+5. After viewing the Success message, go to Web Browser and launch the IP Address:localhost:8080 to launch the Spark UI. The UI will give info like Number of Workers, Memory in Use, Applications Data, Worker Address,etc.
+
+6. Compile the Bash Profile.
+	. ~/.bash_profile
+
+7. Compile the program that is available in the path 'spark-cluster-master/spark-cluster/src/main/scala/SparkPi.scala' by using sbt to make a jar file that we will use while implementing the program on the cluster.
+	cd spark-cluster
+	sbt package
+
+8. The deployment of program is done through 'spark-submit' script with certain parameters like Program we are running, URL of Cluster being hosted and path of the jar file.
+	~/spark-2.0.2-bin-hadoop2.7/bin/spark-submit --class "SparkPi" --master spark://quickstart.cloudera:7077 ./target/scala-2.10/spark-sample_2.10-1.0.jar
+
+9. The program SparkPi program uses the Monte-Carlo alogorithm to calculate the approximate value of PI by running 200,000 simulations of the algorithm. After program implementation we can see output among the display like : "Pi is roughly 3.14048".
+10. On going back to the Spark Cluster UI, we can see under the "Completed Applications" section that the "SparkPi" application has been successfully completed and the time duration it took for completion.
+
+11. We can stop the Worker Node by hitting "Ctrl+c" in the terminal running the "spark-class" script.
+
+12. Master node can be stopped by running the 'stop-master.sh'.
+	sbin/stop-master.sh
+
+Refer the video "Spark Standalone Cluster Deployment with Scala program" (https://youtu.be/nx_v721rc9A) for more clarity.   
