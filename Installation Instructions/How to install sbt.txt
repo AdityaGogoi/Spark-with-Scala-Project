@@ -1,0 +1,23 @@
+1. Download from :-https://dl.bintray.com/sbt/native-packages/sbt/0.13.11/sbt-0.13.11.zip
+
+2. Extract the zip file
+
+3. Move to opt folder:
+sudo mv sbt/ /opt/
+
+4.Open the .profile of Bash shell:-
+nano ~/.bash_profile(press enter)
+(You will see the .profile of bash shell now)
+
+5. Enter the Path in the environmet variable section.
+PATH=$PATH:/opt/sbt/bin:/opt/sbt/bin
+OR
+PATH=$PATH:/opt/sbt/bin (This one)
+Press Ctrl+o to save and press enter
+Press Ctrl+x to exit
+
+6.Reload bash profile: You have to do this every time you open any new terminal window) 
+source ~/.bash_profile
+. ~/.bash_profile
+
+7. In the terminal type sbt(Enter).
